@@ -1,7 +1,14 @@
 # Kumario
 
-How you can help?
------------------
+## Build and run
+
+    $ mkdir build
+    $ cd build
+    $ cmake ..
+    $ make
+    $ ./Kumario
+
+## How to help
 
 - Do not fork.
 - Do not contact me.

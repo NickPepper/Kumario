@@ -4,7 +4,8 @@
 #define HEADER_H_20160425_123456
 
 #include <SDL.h>
-//#include <SDL_image.h>
-//#include <string>
+#include <SDL_image.h>
+//#include <SDL_audio.h>
+#include <SDL_mixer.h>
 
 #endif
