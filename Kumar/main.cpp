@@ -1,4 +1,5 @@
 #include "header.h"
+#include <sys/utsname.h>   // for 'uname'
 
 const bool DEBUG                = true;
 const char* WINDOW_TITLE        = "SDL2 Kumario";
@@ -31,6 +32,10 @@ const char* lowEffectFileName = "assets/sounds/.wav";
 
 bool getPlatformAndCPUInformation()
 {
+    struct utsname uname_pointer;
+
+    uname(&uname_pointer);
+
     printf("\n");
     
     /*
@@ -42,17 +47,23 @@ bool getPlatformAndCPUInformation()
         iOS
         Android
     */
-    SDL_Log("Platform: %s", SDL_GetPlatform());
+    SDL_Log(ANSI_COLOR_YELLOW "Platform: " ANSI_COLOR_CYAN "%s" ANSI_COLOR_RESET, SDL_GetPlatform());
 
     // RAM amount
     SDL_Log("RAM: %d MB", SDL_GetSystemRAM());
 
-    ///////////////////////////////////////////////////////////
-    // TODO: OS name (!)
+    /////////////////////////////////////////////////////////////////////////////////////////
     // TODO: processor model (!)
     // TODO: byte order (!)
     // TODO: etc info (!)
-    ///////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+    // sys/uname info
+    SDL_Log("Machine: %s", uname_pointer.machine);
+    SDL_Log("System name: %s", uname_pointer.sysname);
+    SDL_Log("Release: %s", uname_pointer.release);
+    SDL_Log("Version: %s", uname_pointer.version);
+    SDL_Log("Nodename: %s", uname_pointer.nodename);
 
     // number of logical cores
     SDL_Log("Logical CPU cores: %d", SDL_GetCPUCount());
@@ -61,37 +72,37 @@ bool getPlatformAndCPUInformation()
     SDL_Log("CPU's L1 cache line size: %d KB", SDL_GetCPUCacheLineSize());
 
     // 3DNow! features support ?
-    SDL_Log("3DNow! support: %s", SDL_Has3DNow()?"YEP":"NOPE");
+    SDL_Log(ANSI_COLOR_YELLOW "3DNow! support: %s", SDL_Has3DNow() ? ANSI_COLOR_GREEN "YEP" ANSI_COLOR_RESET : ANSI_COLOR_RED "NOPE" ANSI_COLOR_RESET);
 
     // AVX features support ?
-    SDL_Log("AVX support: %s", SDL_HasAVX()?"YEP":"NOPE");
+    SDL_Log(ANSI_COLOR_YELLOW "AVX support: %s", SDL_HasAVX() ? ANSI_COLOR_GREEN "YEP" ANSI_COLOR_RESET : ANSI_COLOR_RED "NOPE" ANSI_COLOR_RESET);
 
     // AVX2 features support ?
-    SDL_Log("AVX2 support: %s", SDL_HasAVX2()?"YEP":"NOPE");
+    SDL_Log(ANSI_COLOR_YELLOW "AVX2 support: %s", SDL_HasAVX2() ? ANSI_COLOR_GREEN "YEP" ANSI_COLOR_RESET : ANSI_COLOR_RED "NOPE" ANSI_COLOR_RESET);
 
     // AltiVec features support ?
-    SDL_Log("AltiVec support: %s", SDL_HasAltiVec()?"YEP":"NOPE");
+    SDL_Log(ANSI_COLOR_YELLOW "AltiVec support: %s", SDL_HasAltiVec() ? ANSI_COLOR_GREEN "YEP" ANSI_COLOR_RESET : ANSI_COLOR_RED "NOPE" ANSI_COLOR_RESET);
 
     // MMX features support ?
-    SDL_Log("MMX support: %s", SDL_HasMMX()?"YEP":"NOPE");
+    SDL_Log(ANSI_COLOR_YELLOW "MMX support: %s", SDL_HasMMX() ? ANSI_COLOR_GREEN "YEP" ANSI_COLOR_RESET : ANSI_COLOR_RED "NOPE" ANSI_COLOR_RESET);
 
     // RDTSC instruction support?
-    SDL_Log("RDTSC support: %s", SDL_HasRDTSC()?"YEP":"NOPE");
+    SDL_Log(ANSI_COLOR_YELLOW "RDTSC support: %s", SDL_HasRDTSC() ? ANSI_COLOR_GREEN "YEP" ANSI_COLOR_RESET : ANSI_COLOR_RED "NOPE" ANSI_COLOR_RESET);
 
     // SSE features support?
-    SDL_Log("SSE support: %s", SDL_HasSSE()?"YEP":"NOPE");
+    SDL_Log(ANSI_COLOR_YELLOW "SSE support: %s", SDL_HasSSE() ? ANSI_COLOR_GREEN "YEP" ANSI_COLOR_RESET : ANSI_COLOR_RED "NOPE" ANSI_COLOR_RESET);
 
     // SSE2 features support?
-    SDL_Log("SSE2 support: %s", SDL_HasSSE2()?"YEP":"NOPE");
+    SDL_Log(ANSI_COLOR_YELLOW "SSE2 support: %s", SDL_HasSSE2() ? ANSI_COLOR_GREEN "YEP" ANSI_COLOR_RESET : ANSI_COLOR_RED "NOPE" ANSI_COLOR_RESET);
 
     // SSE3 features support?
-    SDL_Log("SSE3 support: %s", SDL_HasSSE3()?"YEP":"NOPE");
+    SDL_Log(ANSI_COLOR_YELLOW "SSE3 support: %s", SDL_HasSSE3() ? ANSI_COLOR_GREEN "YEP" ANSI_COLOR_RESET : ANSI_COLOR_RED "NOPE" ANSI_COLOR_RESET);
 
     // SSE4.1 features support?
-    SDL_Log("SSE41 support: %s", SDL_HasSSE41()?"YEP":"NOPE");
+    SDL_Log(ANSI_COLOR_YELLOW "SSE41 support: %s", SDL_HasSSE41() ? ANSI_COLOR_GREEN "YEP" ANSI_COLOR_RESET : ANSI_COLOR_RED "NOPE" ANSI_COLOR_RESET);
 
     // SSE4.2 features support?
-    SDL_Log("SSE42 support: %s", SDL_HasSSE42()?"YEP":"NOPE");
+    SDL_Log(ANSI_COLOR_YELLOW "SSE42 support: %s", SDL_HasSSE42() ? ANSI_COLOR_GREEN "YEP" ANSI_COLOR_RESET : ANSI_COLOR_RED "NOPE" ANSI_COLOR_RESET);
 
     return true;
 }
@@ -352,7 +363,7 @@ int main(/*int argc, char *argv[]*/)
         return 1;
     }
     // play music
-    Mix_PlayMusic( gMusic, -1 );
+    /////////Mix_PlayMusic( gMusic, -1 ); // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 /*
     // load sound effects
